@@ -1,66 +1,76 @@
 #include <iostream>
-#include <string>
+
 using namespace std;
 
 int main()
 {
-        char asc [28] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-    char des [28] = {'z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'};
+    char text[36] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0'};
+    string code[36] = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--..",".----","..---","...--","....-",".....","-....","--...","---..","----.","-----"};
+    string arr="";
     string word;
-    int x;
-    cout<<"if you want to code a massege press (1)"<<endl;
-    cout<<"if you want to code a massege press (2)"<<endl;
-    cin>>x;
-    while(x!=1 && x!=2){
-        cout<<"wrong number"<<endl;
-    cout<<"if you want to code a massege press (1)"<<endl;
-    cout<<"if you want to code a massege press (2)"<<endl;
-    cin>>x;
-    }
-    if (x==1){
-    cout<<"enter the word you want to codeit:";
-    cin.ignore();
-    getline(cin, word);
-
-
-        for(int j=0 ; j<=word.size() ; j++)
-        {
-            for(int i=0 ; i<=27 ; i++)
-            {
-                if(word[j]==' ')
-                {
-                    cout<<" ";
-                }
-                if(word[j]==asc[i])
-                {
-                    cout<<des[i];
-                }
-            }
-
-        }
-    }
-    if (x==2)
+    cout <<"1- Cipher a message"<<endl;
+    cout <<"2- Decipher a message "<<endl;
+    cout <<"3- End "<<endl;
+    int n ;
+    cout<<">>>";
+    cin >> n ;
+    if (n==1)
     {
-            cout<<"enter the word you want to decode it:";
-            cin.ignore();
-            getline(cin, word);
-
-
-        for(int j=0 ; j<=word.size() ; j++)
+        cout<<"enter the word you want to cipher it :";
+        cin.ignore();
+        getline(cin,word);
+        for(int i=0 ; i<word.size() ; i++)
         {
-            for(int i=0 ; i<=27 ; i++)
+            for (int j=0 ; j<37 ; j++)
             {
-                if(word[j]==' ')
+                if (word[i]== text[j])
                 {
-                    cout<<" ";
+                    cout<<code[j]<<" ";
                 }
-                if(word[j]==des[i])
-                {
-                    cout<<asc[i];
-                }
-
+            }
+            if(word[i]==char(32))
+            {
+                cout<<"   ";
             }
         }
     }
+    else if (n==2)
+    {
+        string letter, decryption;
+        cout<<"enter the word you want to decippher it :";
+        cin.ignore();
+        getline(cin,word);
+        for(int i=0; i< word.size(); i++)
+        {
+            while (word[i]!=32)
+            {
+
+                letter+=word[i];
+                i++;
+            }
+            for(int j=0 ; j<26; ++j)
+            {
+                if(letter == code[j])
+                {
+                    decryption += text[j];
+                    letter="";
+                }
+            }
+            if (word[i]==32)
+            {
+                if ((word[i+1]==32 && word[i+2] == 32)||(word[i+1]==32))
+                {
+                    decryption+=" ";
+                }
+            }
+
+
+        }
+        cout<<decryption;
+    }
+    else{
+
+
     return 0;
+    }
 }
